@@ -2,6 +2,7 @@ import React from "react";
 import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 import "../styles/PhotoListItem.scss"
+import photos from "mocks/photos";
 
 const sampleDataForPhotoList = [
   {
@@ -60,7 +61,7 @@ const sampleDataForPhotoList = [
 const PhotoList = () => {
   return (
     <ul className="photo-list">
-      {sampleDataForPhotoList.map((data) => (
+      {photos.map((data) => (
         <div key={data.id} className="photo-list__item">
           <PhotoListItem sampleData={data} />
         </div>
