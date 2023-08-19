@@ -1,15 +1,14 @@
-import React from "react";
-import PhotoFavButton from "./PhotoFavButton";
-import "../styles/PhotoListItem.scss";
+import React from 'react';
+import PhotoFavButton from './PhotoFavButton';
+import '../styles/PhotoListItem.scss';
 
-
-const PhotoListItem = ({ sampleData }) => {
+const PhotoListItem = ({ sampleData, onFavToggle, isFavorited }) => {
   return (
     <div className="photo-list__item">
-      <PhotoFavButton />
-      <img className="photo-list__image" src={sampleData.urls.regular} />
+      <PhotoFavButton onFavToggle={onFavToggle} isFavorited={isFavorited} />
+      <img className="photo-list__image" src={sampleData.urls.regular} alt={sampleData.id} />
       <div className="photo-list__user-alldetails">
-        <img className="photo-list__user-profile" src={sampleData.user.profile} />
+        <img className="photo-list__user-profile" src={sampleData.user.profile} alt={`${sampleData.user.username} profile`} />
         <div className="photo-list__user-details">
           <div className="photo-list__user-info">{sampleData.user.username}</div>
           <div className="photo-list__user-location">
