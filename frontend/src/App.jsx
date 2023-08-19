@@ -21,7 +21,15 @@ function App() {
 
   const openModal = (photo) => {
     setSelectedPhoto(photo); // Set the selected photo
-    setModalOpen(true);
+
+    // Define logic to find similar photos based on your criteria
+    const similarPhotos = photos.filter((p) =>
+      p.id !== photo.id
+      // Add more conditions if needed
+    );
+
+    setSimilarPhotos(similarPhotos); // Set the similar photos
+    setModalOpen(true); // Open the modal
   };
 
   const closeModal = () => {
