@@ -1,11 +1,5 @@
-.photo-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
 .photo-list__item {
-  margin: 24px;
+  margin: 12px;
   padding: 8px;
   border-width: 0.5px;
   border-color: lightgray;
@@ -31,7 +25,6 @@
 
 .photo-list__user-alldetails {
   display: flex;
-  flex-direction: row;
 }
 
 .photo-list__user-profile {
