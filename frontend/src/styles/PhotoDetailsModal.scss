@@ -25,12 +25,16 @@
 }
 
 .photo-details-modal__images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-left: 36px;
   margin-top: 8px;
 }
 
 .photo-details-modal__image {
-  max-width: 95%;
+  flex-basis: calc(33.33% - 10px);
+  max-width: 100%;
   border-radius: 8px;
 }
 
