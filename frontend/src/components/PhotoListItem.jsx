@@ -18,7 +18,7 @@ const PhotoListItem = ({ sampleData, onFavToggle, isFavorited, onPhotoClick }) =
         <div className="photo-list__user-details">
           <div className="photo-list__user-info">{sampleData.user.username}</div>
           <div className="photo-list__user-location">
-            {sampleData.location.city} {sampleData.location.country}
+            {sampleData.location.city}, {sampleData.location.country}
           </div>
         </div>
       </div>
