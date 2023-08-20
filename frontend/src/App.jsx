@@ -8,8 +8,8 @@ import './App.scss';
 function App() {
   const [favoritedPhotos, setFavoritedPhotos] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null); // State to track the selected photo
-  const [similarPhotos, setSimilarPhotos] = useState([]); // State to track similar photos
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [similarPhotos, setSimilarPhotos] = useState([]);
 
   const toggleFav = (photoId) => {
     if (favoritedPhotos.includes(photoId)) {
@@ -22,10 +22,8 @@ function App() {
   const openModal = (photo) => {
     setSelectedPhoto(photo); // Set the selected photo
 
-    // Define logic to find similar photos based on your criteria
     const similarPhotos = photos.filter((p) =>
       p.id !== photo.id
-      // Add more conditions if needed
     );
 
     setSimilarPhotos(similarPhotos); // Set the similar photos
@@ -51,6 +49,8 @@ function App() {
           closeModal={closeModal}
           selectedPhoto={selectedPhoto}
           similarPhotos={similarPhotos}
+          onFavToggle={toggleFav}
+          favoritedPhotos={favoritedPhotos}
         />
       )}
     </div>
