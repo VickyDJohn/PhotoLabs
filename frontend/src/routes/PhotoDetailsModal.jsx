@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from 'components/PhotoFavButton';
-
+import PhotoListItem from 'components/PhotoListItem';
 
 const PhotoDetailsModal = ({ closeModal, selectedPhoto, similarPhotos, onFavToggle, favoritedPhotos }) => {
   return (
@@ -18,12 +18,14 @@ const PhotoDetailsModal = ({ closeModal, selectedPhoto, similarPhotos, onFavTogg
         <img className="photo-details-modal__image" src={selectedPhoto.urls.full} alt={selectedPhoto.id} />
       </div>
       <div className='photo-details-modal__header'>Similar Photos:</div>
-      <div className="photo-details-modal__images">
+      <div className='photo-details-modal__images'>
         {similarPhotos.map((photo) => (
-          <div key={photo.id} className="photo-details-modal__similar-photo">
-            <PhotoFavButton isFavorited={favoritedPhotos.includes(photo.id)} onFavToggle={() => onFavToggle(photo.id)} />
-            <img src={photo.urls.regular} alt={photo.id} />
-          </div>
+          <PhotoListItem
+          key={photo.id}
+          sampleData={photo}
+          onFavToggle={() => onFavToggle(photo.id)}
+          isFavorited={favoritedPhotos.includes(photo.id)}
+        />
         ))}
       </div>
     </div>
