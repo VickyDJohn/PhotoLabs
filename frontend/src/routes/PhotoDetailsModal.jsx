@@ -17,6 +17,16 @@ const PhotoDetailsModal = ({ closeModal, selectedPhoto, similarPhotos, onFavTogg
         />
         <img className="photo-details-modal__image" src={selectedPhoto.urls.full} alt={selectedPhoto.id} />
       </div>
+      <div className='photo-list__user-alldetails'>
+        <img className="photo-list__user-profile" src={selectedPhoto.user.profile} alt={`${selectedPhoto.user.username} profile`} />
+        <div className="photo-list__user-info">
+          <div>{selectedPhoto.user.username}</div>
+          <div className="photo-list__user-location">
+            {selectedPhoto.location.city}, {selectedPhoto.location.country}
+          </div>
+        </div>
+      </div>
+      <div className="photo-details-modal__separator"></div>
       <div className='photo-details-modal__header'>Similar Photos:</div>
       <div className='photo-details-modal__images'>
         {similarPhotos.map((photo) => (
