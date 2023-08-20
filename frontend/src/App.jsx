@@ -1,39 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import photos from 'mocks/photos';
 import topics from 'mocks/topics';
+import useApplicationData from 'hooks/useApplicationData';
 import './App.scss';
 
 function App() {
-  const [favoritedPhotos, setFavoritedPhotos] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [similarPhotos, setSimilarPhotos] = useState([]);
-
-  const toggleFav = (photoId) => {
-    if (favoritedPhotos.includes(photoId)) {
-      setFavoritedPhotos(favoritedPhotos.filter((id) => id !== photoId));
-    } else {
-      setFavoritedPhotos([...favoritedPhotos, photoId]);
-    }
-  };
-
-  const openModal = (photo) => {
-    setSelectedPhoto(photo); // Set the selected photo
-
-    const similarPhotos = photos.filter((p) =>
-      p.id !== photo.id
-    );
-
-    setSimilarPhotos(similarPhotos); // Set the similar photos
-    setModalOpen(true); // Open the modal
-  };
-
-  const closeModal = () => {
-    setSelectedPhoto(null); // Clear the selected photo
-    setModalOpen(false);
-  };
+  const {
+    favoritedPhotos,
+    modalOpen,
+    selectedPhoto,
+    similarPhotos,
+    toggleFav,
+    openModal,
+    closeModal,
+  } = useApplicationData(photos, topics);
 
   return (
     <div className="App">
@@ -42,7 +24,7 @@ function App() {
         topics={topics}
         favoritedPhotos={favoritedPhotos}
         onFavToggle={toggleFav}
-        onPhotoClick={openModal} // Pass the openModal function as the click handler
+        onPhotoClick={openModal}
       />
       {modalOpen && (
         <PhotoDetailsModal
