@@ -5,7 +5,7 @@ import '../styles/PhotoListItem.scss';
 const PhotoListItem = ({ sampleData, onFavToggle, isFavorited, onPhotoClick }) => {
 
   return (
-    <div className="photo-list__item">
+    <div>
       <PhotoFavButton onFavToggle={onFavToggle} isFavorited={isFavorited} />
       <img
         className="photo-list__image"
