@@ -3,9 +3,7 @@ import PhotoFavButton from './PhotoFavButton';
 import '../styles/PhotoListItem.scss';
 
 const PhotoListItem = ({ sampleData, onFavToggle, isFavorited, onPhotoClick }) => {
-  const handlePhotoClick = () => {
-    onPhotoClick(sampleData);
-  };
+
   return (
     <div className="photo-list__item">
       <PhotoFavButton onFavToggle={onFavToggle} isFavorited={isFavorited} />
@@ -13,7 +11,7 @@ const PhotoListItem = ({ sampleData, onFavToggle, isFavorited, onPhotoClick }) =
         className="photo-list__image"
         src={sampleData.urls.regular}
         alt={sampleData.id}
-        onClick={handlePhotoClick}
+        onClick={onPhotoClick}
       />
       <div className="photo-list__user-alldetails">
         <img className="photo-list__user-profile" src={sampleData.user.profile} alt={`${sampleData.user.username} profile`} />
