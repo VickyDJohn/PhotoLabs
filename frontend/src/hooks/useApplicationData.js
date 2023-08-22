@@ -1,18 +1,26 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 
 const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL';
+const SET_PHOTO_DATA = 'SET_PHOTO_DATA';
+const SET_TOPIC_DATA = 'SET_TOPIC_DATA';
 
 const initialState = {
   favoritedPhotos: [],
   modalOpen: false,
   selectedPhoto: null,
   similarPhotos: [],
+  photoData: [],
+  topicData: []
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case SET_PHOTO_DATA:
+      return { ...state, photoData: action.payload };
+    case SET_TOPIC_DATA:
+      return { ...state, topicData: action.payload };
     case TOGGLE_FAVORITE:
       const photoId = action.payload;
       if (state.favoritedPhotos.includes(photoId)) {
@@ -28,7 +36,7 @@ const reducer = (state, action) => {
       }
     case OPEN_MODAL:
       const { selectedPhoto, similarPhotos } = action.payload;
-      const photosExcludingSelected = state.photos.filter((p) => p.id !== selectedPhoto.id);
+      const photosExcludingSelected = state.photoData.filter((p) => p.id !== selectedPhoto.id);
       return {
         ...state,
         modalOpen: true,
@@ -47,30 +55,45 @@ const reducer = (state, action) => {
   }
 };
 
-const useApplicationData = (initialPhotos, initialTopics) => {
-  const [state, dispatch] = useReducer(reducer, {
-    ...initialState,
-    photos: initialPhotos,
-    topics: initialTopics,
-  });
+const useApplicationData = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleFav = (photoId) => {
     dispatch({ type: TOGGLE_FAVORITE, payload: photoId });
   };
 
   const openModal = (photo) => {
-    const payload = {
-      selectedPhoto: photo,
-      similarPhotos: state.photos.filter((p) => p.id !== photo.id),
-    };
-    dispatch({ type: OPEN_MODAL, payload });
+    const similarPhotos = state.photoData.filter((p) => p.id !== photo.id);
+    dispatch({ type: OPEN_MODAL, payload: { selectedPhoto: photo, similarPhotos } });
   };
 
   const closeModal = () => {
     dispatch({ type: CLOSE_MODAL });
   };
 
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch({ type: "SET_PHOTO_DATA", payload: data });
+      })
+      .catch((error) => console.log("There was a problem with the fetch operation:", error.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: SET_TOPIC_DATA, payload: data }));
+  }, []);
+
   return {
+    photoData: state.photoData,
+    topicData: state.topicData,
     favoritedPhotos: state.favoritedPhotos,
     modalOpen: state.modalOpen,
     selectedPhoto: state.selectedPhoto,
