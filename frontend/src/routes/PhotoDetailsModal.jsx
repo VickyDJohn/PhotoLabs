@@ -32,7 +32,7 @@ const PhotoDetailsModal = ({ closeModal, selectedPhoto, similarPhotos, onFavTogg
         {similarPhotos.map((photo) => (
           <PhotoListItem
           key={photo.id}
-          sampleData={photo}
+          photo={photo}
           onFavToggle={() => onFavToggle(photo.id)}
           isFavorited={favoritedPhotos.includes(photo.id)}
         />
