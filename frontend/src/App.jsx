@@ -1,8 +1,6 @@
 import React from 'react';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
-import photos from 'mocks/photos';
-import topics from 'mocks/topics';
 import useApplicationData from 'hooks/useApplicationData';
 import './App.scss';
 
@@ -15,13 +13,15 @@ function App() {
     toggleFav,
     openModal,
     closeModal,
-  } = useApplicationData(photos, topics);
+    photoData,
+    topicData,
+  } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
-        topics={topics}
+        photoData={photoData}
+        topicData={topicData}
         favoritedPhotos={favoritedPhotos}
         onFavToggle={toggleFav}
         onPhotoClick={openModal}
