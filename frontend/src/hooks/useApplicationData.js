@@ -1,38 +1,80 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+
+const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
+const OPEN_MODAL = 'OPEN_MODAL';
+const CLOSE_MODAL = 'CLOSE_MODAL';
+
+const initialState = {
+  favoritedPhotos: [],
+  modalOpen: false,
+  selectedPhoto: null,
+  similarPhotos: [],
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case TOGGLE_FAVORITE:
+      const photoId = action.payload;
+      if (state.favoritedPhotos.includes(photoId)) {
+        return {
+          ...state,
+          favoritedPhotos: state.favoritedPhotos.filter((id) => id !== photoId),
+        };
+      } else {
+        return {
+          ...state,
+          favoritedPhotos: [...state.favoritedPhotos, photoId],
+        };
+      }
+    case OPEN_MODAL:
+      const { selectedPhoto, similarPhotos } = action.payload;
+      const photosExcludingSelected = state.photos.filter((p) => p.id !== selectedPhoto.id);
+      return {
+        ...state,
+        modalOpen: true,
+        selectedPhoto,
+        similarPhotos: photosExcludingSelected,
+      };
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modalOpen: false,
+        selectedPhoto: null,
+        similarPhotos: [],
+      };
+    default:
+      return state;
+  }
+};
 
 const useApplicationData = (initialPhotos, initialTopics) => {
-  const [favoritedPhotos, setFavoritedPhotos] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [similarPhotos, setSimilarPhotos] = useState([]);
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+    photos: initialPhotos,
+    topics: initialTopics,
+  });
 
   const toggleFav = (photoId) => {
-    if (favoritedPhotos.includes(photoId)) {
-      setFavoritedPhotos(favoritedPhotos.filter((id) => id !== photoId));
-    } else {
-      setFavoritedPhotos([...favoritedPhotos, photoId]);
-    }
+    dispatch({ type: TOGGLE_FAVORITE, payload: photoId });
   };
 
   const openModal = (photo) => {
-    setSelectedPhoto(photo);
-
-    const photosExcludingSelected = initialPhotos.filter((p) => p.id !== photo.id);
-    setSimilarPhotos(photosExcludingSelected);
-
-    setModalOpen(true);
+    const payload = {
+      selectedPhoto: photo,
+      similarPhotos: state.photos.filter((p) => p.id !== photo.id),
+    };
+    dispatch({ type: OPEN_MODAL, payload });
   };
 
   const closeModal = () => {
-    setSelectedPhoto(null);
-    setModalOpen(false);
+    dispatch({ type: CLOSE_MODAL });
   };
 
   return {
-    favoritedPhotos,
-    modalOpen,
-    selectedPhoto,
-    similarPhotos,
+    favoritedPhotos: state.favoritedPhotos,
+    modalOpen: state.modalOpen,
+    selectedPhoto: state.selectedPhoto,
+    similarPhotos: state.similarPhotos,
     toggleFav,
     openModal,
     closeModal,
