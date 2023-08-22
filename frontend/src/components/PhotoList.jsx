@@ -4,11 +4,21 @@ import '../styles/PhotoList.scss';
 import '../styles/PhotoListItem.scss';
 
 const PhotoList = ({ photos, favoritedPhotos, onFavToggle, onPhotoClick }) => {
+  console.log(photos);
+
   return (
     <ul className="photo-list">
-      {photos.map((data) => (
-        <div key={data.id} className="photo-list__item" onClick={() => onPhotoClick(data)}>
-          <PhotoListItem sampleData={data} onFavToggle={() => onFavToggle(data.id)} isFavorited={favoritedPhotos.includes(data.id)} />
+      {photos && photos.map(photo => (
+        <div 
+          key={photo.id} 
+          className="photo-list__item" 
+          onClick={() => onPhotoClick(photo)}
+        >
+          <PhotoListItem 
+            photo={photo} 
+            onFavToggle={() => onFavToggle(photo.id)} 
+            isFavorited={favoritedPhotos.includes(photo.id)} 
+          />
         </div>
       ))}
     </ul>
