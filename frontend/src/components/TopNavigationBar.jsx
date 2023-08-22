@@ -9,10 +9,12 @@ const TopNavigationBar = ({ topics, favoritedPhotos }) => {
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
-      <TopicList topics={topics} />
-      <FavBadge isFavPhotoExist={isFavPhotoExist} />
+      <div className='top-nav-bar__topics__logo'>
+        <TopicList topics={topics} />
+        <FavBadge isFavPhotoExist={isFavPhotoExist} />
+      </div>
     </div>
   );
-}
+};
 
 export default TopNavigationBar;
