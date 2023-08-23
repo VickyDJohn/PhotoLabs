@@ -13,7 +13,7 @@ const PhotoDetailsModal = ({ closeModal, selectedPhoto, similarPhotos, onFavTogg
       <div>
         <PhotoFavButton
           isFavorited={favoritedPhotos.includes(selectedPhoto.id)}
-          onFavToggle={() =>  onFavToggle(selectedPhoto.id)}
+          onFavToggle={() => onFavToggle(selectedPhoto.id)}
         />
         <img className="photo-details-modal__image" src={selectedPhoto.urls.full} alt={selectedPhoto.id} />
       </div>
@@ -31,11 +31,11 @@ const PhotoDetailsModal = ({ closeModal, selectedPhoto, similarPhotos, onFavTogg
       <div className='photo-details-modal__images'>
         {similarPhotos.map((photo) => (
           <PhotoListItem
-          key={photo.id}
-          photo={photo}
-          onFavToggle={() => onFavToggle(photo.id)}
-          isFavorited={favoritedPhotos.includes(photo.id)}
-        />
+            key={photo.id}
+            photo={photo}
+            onFavToggle={() => onFavToggle(photo.id)}
+            isFavorited={favoritedPhotos.includes(photo.id)}
+          />
         ))}
       </div>
     </div>
