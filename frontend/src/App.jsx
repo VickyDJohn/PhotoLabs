@@ -10,11 +10,12 @@ function App() {
     modalOpen,
     selectedPhoto,
     similarPhotos,
+    photoData,
+    topicData,
     toggleFav,
     openModal,
     closeModal,
-    photoData,
-    topicData,
+    onTopicClick
   } = useApplicationData();
 
   return (
@@ -25,6 +26,7 @@ function App() {
         favoritedPhotos={favoritedPhotos}
         onFavToggle={toggleFav}
         onPhotoClick={openModal}
+        onTopicClick={onTopicClick}
       />
       {modalOpen && (
         <PhotoDetailsModal
