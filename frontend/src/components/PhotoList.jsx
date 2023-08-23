@@ -4,7 +4,6 @@ import '../styles/PhotoList.scss';
 import '../styles/PhotoListItem.scss';
 
 const PhotoList = ({ photos, favoritedPhotos, onFavToggle, onPhotoClick }) => {
-  console.log(photos);
 
   return (
     <ul className="photo-list">
