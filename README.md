@@ -38,7 +38,9 @@ PhotoLabs is a web application that allows users to browse and interact with a c
    ```sh
    npm install
    ```
-3. Navigate to the project directory's frontend folder and install the required dependencies
+3. Make a copy of the .env.example file and rename the duplicated file to '.env.development'
+
+4. Navigate to the project directory's frontend folder and install the required dependencies
    ```sh
    cd PhotoLabs/frontend/
    ```
