@@ -1,24 +1,81 @@
-# react-photolabs
-The PhotoLabs project for the Web Development React course programming.
+# PhotoLabs
 
-# Photolabs
+PhotoLabs is a web application that allows users to browse and interact with a collection of photos based on different topics.
 
-## Setup
+## Table of Contents
+- [Features](#features)
+- [Demo](#demo)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Running the App](#running-the-app)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
+- [License](#license)
 
-Install dependencies with `npm install` in each respective `/frontend` and `/backend`.
+## Features
 
-## [Frontend] Running Webpack Development Server
+- Browse a collection of photos
+- Filter photos by different topics
+- Toggle favorite photos
+- View a zoomed-in version of a photo
+- View similar photos in a modal when a particular photo is clicked
 
-```sh
-cd frontend
-npm start
-```
+## Demo
 
-## [Backend] Running Backend Servier
+![Demo GIF](/PhotoLabs%20Demo.gif)
 
-Read `backend/readme` for further setup details.
+## Getting Started
 
-```sh
-cd backend
-npm start
-```
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/VickyDJohn/PhotoLabs.git
+2. Navigate to the project directory's backend folder and install the required dependencies
+   ```sh
+   cd PhotoLabs/backend/
+   ```
+   ```sh
+   npm install
+   ```
+3. Start the PostgreSQL server
+4. Start the backend sever
+   ```sh
+   npm start
+   ```
+5. Navigate to the frontend folder and install the dependencies and then start the server
+   ```sh
+   cd PhotoLabs/frontend/
+   ```
+   ```sh
+   npm install
+   ```
+   ```sh
+   npm start
+   ```
+6. Open your browser of choice and go to http://localhost:3000 to view the app.
+
+
+## Tech Stack
+
+- Javascript
+- Express
+- CORS
+- React
+- React Router
+- CSS Modules
+- Fetch API
+- PostgreSQL
+
+## Contributing
+Contributions are welcome! To contribute, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature/bugfix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Create a pull request from your branch to the main repository.
+6. Please make sure to follow the code of conduct.
+
+## License
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
