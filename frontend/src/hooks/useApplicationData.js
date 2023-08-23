@@ -5,6 +5,7 @@ const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 const SET_PHOTO_DATA = 'SET_PHOTO_DATA';
 const SET_TOPIC_DATA = 'SET_TOPIC_DATA';
+const SET_TOPIC_PHOTOS = 'SET_TOPIC_PHOTOS';
 
 const initialState = {
   favoritedPhotos: [],
@@ -12,11 +13,13 @@ const initialState = {
   selectedPhoto: null,
   similarPhotos: [],
   photoData: [],
-  topicData: []
+  topicData: [],
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case SET_TOPIC_PHOTOS:
+      return { ...state, photoData: [...action.payload] };
     case SET_PHOTO_DATA:
       return { ...state, photoData: action.payload };
     case SET_TOPIC_DATA:
@@ -56,13 +59,33 @@ const reducer = (state, action) => {
 };
 
 const useApplicationData = () => {
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const toggleFav = (photoId) => {
     dispatch({ type: TOGGLE_FAVORITE, payload: photoId });
   };
 
+  const fetchTopicPhotos = async (topicId) => {
+    try {
+      const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
+      const data = await response.json();
+      dispatch({ type: SET_TOPIC_PHOTOS, payload: data });
+    } catch (error) {
+      console.error('Error fetching topic photos:', error.message);
+    }
+  };
+
+  const onTopicClick = (topicId) => {
+    fetchTopicPhotos(topicId);
+  };
+
   const openModal = (photo) => {
+
+    if (photo.topic_id) {
+      fetchTopicPhotos(photo.topic_id);
+    }
+
     const similarPhotos = state.photoData.filter((p) => p.id !== photo.id);
     dispatch({ type: OPEN_MODAL, payload: { selectedPhoto: photo, similarPhotos } });
   };
@@ -101,6 +124,7 @@ const useApplicationData = () => {
     toggleFav,
     openModal,
     closeModal,
+    onTopicClick
   };
 };
 
