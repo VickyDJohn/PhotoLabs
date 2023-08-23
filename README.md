@@ -38,23 +38,31 @@ PhotoLabs is a web application that allows users to browse and interact with a c
    ```sh
    npm install
    ```
-3. Start the PostgreSQL server
-4. Start the backend sever
-   ```sh
-   npm start
-   ```
-5. Navigate to the frontend folder and install the dependencies and then start the server
+3. Navigate to the project directory's frontend folder and install the required dependencies
    ```sh
    cd PhotoLabs/frontend/
    ```
    ```sh
    npm install
+
+### Running the App
+1. Navigate to the project directory's backend folder
+   ```sh
+   cd PhotoLabs/backend/
    ```
+2. Start the backend server
    ```sh
    npm start
    ```
-6. Open your browser of choice and go to http://localhost:3000 to view the app.
-
+3. Navigate to the project directory's frontend folder
+   ```sh
+   cd PhotoLabs/frontend/
+   ```
+4. Start the frontend server
+   ```sh
+   npm start
+   ```
+5. Open your browser and go to http://localhost:3000 to view the app.
 
 ## Tech Stack
 
