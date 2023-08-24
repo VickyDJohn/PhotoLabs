@@ -1,7 +1,6 @@
 import React from 'react';
 import TopNavigationBar from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
-import TopicList from 'components/TopicList';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = ({ photoData, topicData, favoritedPhotos, onFavToggle, onPhotoClick, onTopicClick }) => {
