@@ -6,6 +6,7 @@ const CLOSE_MODAL = 'CLOSE_MODAL';
 const SET_PHOTO_DATA = 'SET_PHOTO_DATA';
 const SET_TOPIC_DATA = 'SET_TOPIC_DATA';
 const SET_TOPIC_PHOTOS = 'SET_TOPIC_PHOTOS';
+const TOGGLE_DARK_MODE = 'TOGGLE_DARK_MODE';
 
 const initialState = {
   favoritedPhotos: [],
@@ -14,6 +15,7 @@ const initialState = {
   similarPhotos: [],
   photoData: [],
   topicData: [],
+  darkMode: false
 };
 
 const reducer = (state, action) => {
@@ -53,6 +55,8 @@ const reducer = (state, action) => {
         selectedPhoto: null,
         similarPhotos: [],
       };
+    case TOGGLE_DARK_MODE:
+      return { ...state, darkMode: !state.darkMode };
     default:
       return state;
   }
@@ -114,6 +118,10 @@ const useApplicationData = () => {
       .then((data) => dispatch({ type: SET_TOPIC_DATA, payload: data }));
   }, []);
 
+  const toggleDarkMode = () => {
+    dispatch({ type: 'TOGGLE_DARK_MODE' });
+  };
+
   return {
     photoData: state.photoData,
     topicData: state.topicData,
@@ -121,6 +129,8 @@ const useApplicationData = () => {
     modalOpen: state.modalOpen,
     selectedPhoto: state.selectedPhoto,
     similarPhotos: state.similarPhotos,
+    darkMode: state.darkMode,
+    toggleDarkMode,
     toggleFav,
     openModal,
     closeModal,

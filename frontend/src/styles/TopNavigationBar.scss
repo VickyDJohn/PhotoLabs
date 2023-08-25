@@ -22,3 +22,15 @@
   text-underline-position: auto;
   margin-left: 24px;
 }
+
+.top-nav-bar.dark {
+  background-color: #333;
+}
+
+.top-nav-bar__logo.light {
+  color: #333;
+}
+
+.top-nav-bar.dark .top-nav-bar__logo.light {
+  color: #fff;
+}

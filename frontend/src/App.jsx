@@ -12,6 +12,8 @@ function App() {
     similarPhotos,
     photoData,
     topicData,
+    darkMode,
+    toggleDarkMode,
     toggleFav,
     openModal,
     closeModal,
@@ -19,7 +21,7 @@ function App() {
   } = useApplicationData();
 
   return (
-    <div className="App">
+    <div className={`App ${darkMode ? 'dark' : ''}`}>
       <HomeRoute
         photoData={photoData}
         topicData={topicData}
@@ -27,6 +29,8 @@ function App() {
         onFavToggle={toggleFav}
         onPhotoClick={openModal}
         onTopicClick={onTopicClick}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
       />
       {modalOpen && (
         <PhotoDetailsModal
